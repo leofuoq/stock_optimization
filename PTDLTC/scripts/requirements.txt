@@ -3,5 +3,5 @@ pandas
 numpy
 plotly.express
 vnstock3
-pypfopt
+PyPortfolioOpt
 
