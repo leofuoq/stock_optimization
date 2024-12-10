@@ -1,1 +1,7 @@
+streamlit
+pandas
+numpy
+plotly
+vnstock3
+pypfopt
 
