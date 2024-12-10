@@ -669,13 +669,32 @@ def display_results(original_name, result):
     if result:
         st.markdown(f"## {original_name}")
         st.markdown("### Hiệu suất danh mục:")
+        
+        # Lợi nhuận kỳ vọng
         st.write(f"- **Lợi nhuận kỳ vọng:** {result.get('Lợi nhuận kỳ vọng', 0):.2%}")
-        st.write(f"- **Rủi ro (Độ lệch chuẩn):** {result.get('Rủi ro (Độ lệch chuẩn)', 0):.2%}")
+        
+        # Rủi ro (Độ lệch chuẩn)
+        risk_std = result.get('Rủi ro (Độ lệch chuẩn)', 0)
+        if risk_std == 0:
+            st.write("- **Rủi ro (Độ lệch chuẩn):** Chỉ số không áp dụng cho mô hình này")
+        else:
+            st.write(f"- **Rủi ro (Độ lệch chuẩn):** {risk_std:.2%}")
+        
+        # Rủi ro CVaR
         if "Rủi ro CVaR" in result:
             st.write(f"- **Mức tổn thất trung bình trong tình huống xấu nhất:** {result['Rủi ro CVaR']:.2%}")
+        
+        # Rủi ro CDaR
         if "Rủi ro CDaR" in result:
             st.write(f"- **Mức giảm giá trị trung bình trong giai đoạn có sự giảm giá trị sâu:** {result['Rủi ro CDaR']:.2%}")
-        st.write(f"- **Tỷ lệ Sharpe:** {result.get('Tỷ lệ Sharpe', 0):.2f}")
+        
+        # Tỷ lệ Sharpe
+        sharpe_ratio = result.get('Tỷ lệ Sharpe', 0)
+        if sharpe_ratio == 0:
+            st.write("- **Tỷ lệ Sharpe:** Chỉ số không áp dụng cho mô hình này")
+        else:
+            st.write(f"- **Tỷ lệ Sharpe:** {sharpe_ratio:.2f}")
+
 
         # Trọng số danh mục
         weights = result["Trọng số danh mục"]
