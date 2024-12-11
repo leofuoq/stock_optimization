@@ -741,7 +741,7 @@ option = st.sidebar.radio("Chọn phương thức", ["Tự chọn cổ phiếu",
 if option == "Tự chọn cổ phiếu":
 
     # Giao diện người dùng để lọc từ file CSV
-    st.title("Dashboard hỗ trợ xây dựng danh mục đầu tư chứng khoán")
+    st.title("Dashboard hỗ trợ tối ưu hóa danh mục đầu tư chứng khoán")
     # Sidebar
     st.sidebar.title("Bộ lọc và Cấu hình")
     # Bộ lọc theo sàn giao dịch (exchange)
