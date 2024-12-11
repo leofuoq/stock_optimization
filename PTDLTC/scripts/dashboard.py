@@ -434,6 +434,14 @@ def min_cvar(data, total_investment, beta=0.95):
         cvar_optimizer = EfficientCVaR(mean_returns, returns, beta=beta)
         weights = cvar_optimizer.min_cvar()
         performance = cvar_optimizer.portfolio_performance()
+        # Tính ma trận hiệp phương sai
+        cov_matrix = risk_models.sample_cov(data)
+
+        # Tính độ lệch chuẩn của danh mục
+        weights_array = np.array(list(weights.values()))
+        portfolio_std = np.sqrt(np.dot(weights_array.T, np.dot(cov_matrix, weights_array)))
+        rf = 0.02
+        sharpe_ratio = (performance[0] - rf)/ portfolio_std
 
         tickers = data.columns.tolist()
         latest_prices = get_latest_prices(tickers)
@@ -447,7 +455,10 @@ def min_cvar(data, total_investment, beta=0.95):
             "Rủi ro CVaR": performance[1],
             "Số cổ phiếu cần mua": allocation_lp,
             "Số tiền còn lại": leftover_lp,
-            "Giá cổ phiếu": latest_prices
+            "Giá cổ phiếu": latest_prices,
+            "Rủi ro (Độ lệch chuẩn)": portfolio_std,
+            "Tỷ lệ Sharpe": sharpe_ratio
+
         }
     except Exception as e:
         print(f"Lỗi trong mô hình Min CVaR: {e}")
@@ -463,6 +474,12 @@ def min_cdar(data, total_investment, beta=0.95):
         weights = cdar_optimizer.min_cdar()
         performance = cdar_optimizer.portfolio_performance()
 
+        cov_matrix = risk_models.sample_cov(data)
+        weights_array = np.array(list(weights.values()))
+        portfolio_std = np.sqrt(np.dot(weights_array.T, np.dot(cov_matrix, weights_array)))
+        rf = 0.02
+        sharpe_ratio = (performance[0] - rf)/ portfolio_std
+
         tickers = data.columns.tolist()
         latest_prices = get_latest_prices(tickers)
         latest_prices_series = pd.Series(latest_prices)
@@ -475,7 +492,9 @@ def min_cdar(data, total_investment, beta=0.95):
             "Rủi ro CDaR": performance[1],
             "Số cổ phiếu cần mua": allocation_lp,
             "Số tiền còn lại": leftover_lp,
-            "Giá cổ phiếu": latest_prices
+            "Giá cổ phiếu": latest_prices,
+            "Rủi ro (Độ lệch chuẩn)": portfolio_std,
+            "Tỷ lệ Sharpe": sharpe_ratio
         }
     except Exception as e:
         print(f"Lỗi trong mô hình Min CDaR: {e}")
