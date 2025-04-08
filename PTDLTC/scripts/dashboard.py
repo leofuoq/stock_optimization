@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 import numpy as np
-from vnstock3 import Vnstock
+from vnstock import Vnstock
 import datetime  # Import thêm thư viện datetime để lấy ngày hiện tại
 from scipy.optimize import minimize
 from pypfopt import EfficientFrontier, risk_models, expected_returns, DiscreteAllocation
