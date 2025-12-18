@@ -988,4 +988,3 @@ elif option == "Hệ thống đề xuất cổ phiếu tự động":
         main1()
 
 
-
