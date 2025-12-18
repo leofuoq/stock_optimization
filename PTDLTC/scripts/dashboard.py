@@ -35,13 +35,13 @@ def fetch_data_from_csv():
 df = fetch_data_from_csv()
 # Tạo đối tượng Vnstock (để lấy dữ liệu giá cổ phiếu)
 def create_vnstock_instance():
-    return Vnstock().stock(symbol='VN30F1M', source='TCBS')
+    return Vnstock().stock(symbol='VN30F1M', source='VCI')
 # def fetch_stock_data( start_date, end_date):
 #     tickers = st.session_state.selected_stocks
 #     data = pd.DataFrame()
 #     skipped_tickers = []  # Danh sách các mã bị bỏ qua do không có dữ liệu
 #     for ticker in tickers:
-#         stock = Vnstock().stock(symbol=ticker, source='TCBS')
+#         stock = Vnstock().stock(symbol=ticker, source='VCI')
 #         try:
 #             stock_data = stock.quote.history(start=str(start_date), end=str(end_date))
 #             if stock_data is not None and not stock_data.empty:
@@ -304,7 +304,7 @@ def fetch_stock_data2(symbols, start_date, end_date):
         Lấy dữ liệu cho một cổ phiếu.
         """
         try:
-            stock = Vnstock().stock(symbol=ticker, source='TCBS')
+            stock = Vnstock().stock(symbol=ticker, source='VCI')
             stock_data = stock.quote.history(start=str(start_date), end=str(end_date))
             if stock_data is not None and not stock_data.empty:
                 stock_data = stock_data[['time', 'close']].rename(columns={'close': ticker})
@@ -345,7 +345,7 @@ def get_latest_prices(tickers):
 
     for ticker in tickers:
         try:
-            stock = Vnstock().stock(symbol=ticker, source='TCBS')  # Tạo đối tượng cổ phiếu
+            stock = Vnstock().stock(symbol=ticker, source='VCI')  # Tạo đối tượng cổ phiếu
             stock_data = stock.quote.history(start=str(start_date), end=str(end_date))
             if stock_data is not None and not stock_data.empty:
                 # Lấy giá đóng cửa (close) của ngày cuối cùng trong dữ liệu
@@ -988,6 +988,7 @@ elif option == "Hệ thống đề xuất cổ phiếu tự động":
     # Gọi hàm chính
     if __name__ == "__main__":
         main1()
+
 
 
 
