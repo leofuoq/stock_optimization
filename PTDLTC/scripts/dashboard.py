@@ -157,7 +157,7 @@ def plot_interactive_stock_chart(data):
     )
 
     # Hiển thị biểu đồ trên Streamlit
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 # Vẽ biểu đồ đường biên hiệu quả
 def plot_efficient_frontier(ret_arr, vol_arr, sharpe_arr, all_weights, tickers, max_sharpe_idx, optimal_weights):
@@ -274,7 +274,7 @@ def plot_interactive_stock_chart(data):
     data_reset = data.reset_index()
     data_long = pd.melt(data_reset, id_vars=['time'], var_name='Mã cổ phiếu', value_name='Giá đóng cửa')
     fig = px.line(data_long, x='time', y='Giá đóng cửa', color='Mã cổ phiếu', title='Biểu đồ giá cổ phiếu')
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 if "selected_stocks_2" not in st.session_state:
     st.session_state.selected_stocks_2 = []  # Chỉ khởi tạo khi chưa tồn tại
@@ -597,7 +597,7 @@ def backtest_portfolio(symbols, weights, start_date, end_date, benchmark_symbols
         yaxis_title="Lợi suất tích lũy (%)",
         hovermode="x unified"
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
     # Tính toán chỉ số hiệu suất
     sharpe_ratio = portfolio_returns.mean() / portfolio_returns.std() * np.sqrt(252)
@@ -986,5 +986,6 @@ elif option == "Hệ thống đề xuất cổ phiếu tự động":
     # Gọi hàm chính
     if __name__ == "__main__":
         main1()
+
 
 
