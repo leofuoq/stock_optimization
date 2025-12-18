@@ -11,6 +11,11 @@ import sys
 import os
 from concurrent.futures import ThreadPoolExecutor
 import pandas as pd
+import requests
+
+st.write("vnstock:", getattr(vnstock, "__version__", "unknown"))
+st.write("vnstock3:", getattr(vnstock3, "__version__", "unknown"))
+st.write("outbound ip:", requests.get("https://api.ipify.org").text)
 # Đường dẫn đến thư mục data và file CSV
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
@@ -986,5 +991,6 @@ elif option == "Hệ thống đề xuất cổ phiếu tự động":
     # Gọi hàm chính
     if __name__ == "__main__":
         main1()
+
 
 
