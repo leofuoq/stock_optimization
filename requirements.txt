@@ -2,5 +2,5 @@ streamlit
 pandas
 numpy
 plotly.express
-vnstock
+vnstock3
 PyPortfolioOpt
